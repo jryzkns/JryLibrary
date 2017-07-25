@@ -19,17 +19,6 @@ def drawObjs(obj,ringrad, n):
 		obj.pos = ringCoord(ringrad,n,i)
 		obj.draw()
 
-def crossDraw(line,size):
-	##	needs to be called at every flip
-	'''p.v.line, int -> null'''
-	##	not a very good function, draw a '+' with pos [0,1]
-	##	for a more efficient way for doing this
-	line.start =	[0,size]
-	line.end =	[0,-size]	
-	line.draw()
-	line.start =	[size,0]
-	line.end =	[-size,0]
-	line.draw()
 
 def setLine(line, setsize, setori, setpos):
 	'''p.v.line,int,bool,int,ls[2]->null'''
@@ -57,4 +46,48 @@ def getAccuracy(target, inputls):
 	##	what you want the subject to press, and you get their input
 	##	data, you can simply use this to validate the accuracy
 	return target in inputls
+
+def autoscale(winsize,imgsize,screenscale):
+	'''ls[2],ls[2],float->ls[2]'''
+	##	automatically scales image size to fit in window, screenscale
+	##	should be less than 1, the caller is responsible for giving
+	##	the correct value. This function should be called right after
+	##	the image object is declared.
+
+	##	example usage(if the window is called main):
+	##	img = p.v.ImageStim(...)
+	##	img.size = autoscale(main.size,img.size,n)
+
+	##	looks for the longest side for
+	##	both the window and the image
+	longerimgside = imgsize[0]
+	correswinside = winsize[0]
+	if (longerimgside < imgsize[1]):
+		longerimgside = imgsize[1]
+		correswinside = winsize[1]
+
+	scaledsize = screenscale * correswinside
+
+	scalefactor = scaledsize / longerimgside
+
+	for i in range(len(imgsize)):
+		imgsize[i] *= scalefactor
+
+	return imgsize
+
+'''LIST OF OBJECTS THAT SHOULD BE INCLUDED IN ALL PROJECTS'''
+
+#main = psychopy.visual.Window(
+#        units   = "pix",
+#        fullscr = True,
+#        color   = "#000000"
+#)
+
+#fcross = psychopy.visual.TextStim(
+#	##	remember to call drawing this at the start of each drawloop
+#	win	= main,
+#	pos	= [0,1],	##slight offset to centre the cross
+#	text	= "+",
+#	color	= '#FFFFFF'
+#)
 
