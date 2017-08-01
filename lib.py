@@ -1,8 +1,44 @@
+from Tkinter import *
 import psychopy.visual
 import psychopy.event
 import math
 import random
 import time
+
+def getID():
+	'''null->str'''
+	##	gets Participant from the user by drawing a small window,
+	##	this function will return whatever was put into the text
+	##	field.
+
+	##	Sample usage:
+	##	PID = getID()
+	##	datafile = open(PID,"w")
+	
+	def exit():
+		'''null->null'''
+		prompt.destroy()
+
+	prompt = Tk()
+
+	var = StringVar()
+	label = Label( prompt, textvariable=var )
+	var.set("Please input subject Number:")
+
+	n = StringVar()
+	data = Entry( prompt, textvariable = n)
+
+	OK = Button(prompt, text ="OK", command = exit)
+
+	label.pack()
+	data.pack()
+	OK.pack()
+
+	prompt.mainloop()
+
+	s = n.get()
+
+	return s
 
 def ringCoord(ringrad, n, i):
 	'''int,int,int -> null'''
