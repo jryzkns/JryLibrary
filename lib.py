@@ -1,4 +1,5 @@
 from Tkinter import *
+from types import *
 import psychopy.visual
 import psychopy.event
 import math
@@ -81,7 +82,11 @@ def getAccuracy(target, inputls):
 	##	true. Useful in that if you have a set of keys that are
 	##	what you want the subject to press, and you get their input
 	##	data, you can simply use this to validate the accuracy
-	return target in inputls
+
+	accuracy = False	
+	if (type(inputls) != Nonetype):
+		accuracy = target in inputls
+	return accuracy
 
 def autoscale(winsize,imgsize,screenscale):
 	'''ls[2],ls[2],float->ls[2]'''
