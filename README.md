@@ -1,5 +1,5 @@
 # JryLibrary
-A hearty homemade Psychopy library
+A hearty set of Psychopy helper functions (code is obsolete)
 
 A quick guide on hex values for colors:
 
